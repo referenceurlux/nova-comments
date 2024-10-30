@@ -9,9 +9,9 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\MorphTo;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Resource;
+use Outl1ne\NovaTrumbowygField\Trumbowyg;
 
 class Comment extends Resource
 {
@@ -44,22 +44,22 @@ class Comment extends Resource
     public function fields(NovaRequest $request): array
     {
         return [
-            Textarea::make('comment')
+            Trumbowyg::make(__('comment'), 'comment')
                 ->alwaysShow()
                 ->hideFromIndex(),
 
-            MorphTo::make('Commentable')->onlyOnIndex(),
+            MorphTo::make(__('Commentable'))->onlyOnIndex(),
 
-            Text::make('comment')
+            Text::make(__('comment'), 'comment')
                 ->displayUsing(function ($comment) {
                     return Str::limit($comment, config('nova-comments.limit'));
                 })
                 ->onlyOnIndex(),
 
-            BelongsTo::make('Commenter', 'commenter', config('nova-comments.commenter.nova-resource'))
+            BelongsTo::make(__('Commenter'), 'commenter', config('nova-comments.commenter.nova-resource'))
                 ->exceptOnForms(),
 
-            DateTime::make('Created', 'created_at')
+            DateTime::make(__('Created'), 'created_at')
                 ->exceptOnForms()
                 ->sortable(),
         ];

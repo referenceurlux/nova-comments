@@ -27,7 +27,8 @@
     ],
     "require": {
         "php": ">=8.0",
-        "laravel/nova": "^4.0"
+        "laravel/nova": "^4.0",
+        "outl1ne/nova-trumbowyg-field": "^1.1"
     },
     "autoload": {
         "psr-4": {
