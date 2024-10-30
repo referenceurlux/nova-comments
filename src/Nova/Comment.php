@@ -63,7 +63,8 @@ class Comment extends Resource
         return [
             Trumbowyg::make(__('comment'), 'comment')
                 ->alwaysShow()
-                ->hideFromIndex(),
+                ->hideFromIndex()
+                ->asHtml(),
 
             MorphTo::make(__('Commentable'))->onlyOnIndex(),
 
