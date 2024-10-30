@@ -61,7 +61,8 @@ class Comment extends Resource
     public function fields(NovaRequest $request): array
     {
         return [
-            Trumbowyg::make(__('comment'), 'comment')
+            Trumbowyg::make(__('comment'), 'comment', function () {
+                return strip_tags($this->comment);})
                 ->alwaysShow()
                 ->hideFromIndex()
                 ->displayUsing(fn($value) => strip_tags($value)),
