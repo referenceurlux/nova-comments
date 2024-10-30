@@ -61,17 +61,15 @@ class Comment extends Resource
     public function fields(NovaRequest $request): array
     {
         return [
-            Trumbowyg::make(__('comment'), 'comment', function () {
-                return strip_tags($this->comment);})
+            Trumbowyg::make(__('comment'), 'comment')
                 ->alwaysShow()
-                ->hideFromIndex()
-                ->displayUsing(fn($value) => strip_tags($value)),
+                ->hideFromIndex(),
 
             MorphTo::make(__('Commentable'))->onlyOnIndex(),
 
             Text::make(__('comment'), 'comment')
                 ->displayUsing(function ($comment) {
-                    return Str::limit($comment, config('nova-comments.limit'));
+                    return Str::limit(strip_tags($comment), config('nova-comments.limit'));
                 })
                 ->onlyOnIndex(),
 
