@@ -39,6 +39,23 @@ class Comment extends Resource
     ];
 
     /**
+     *
+     * @return string
+     */
+    public static function label()
+    {
+        return __('Comment');
+    }
+
+    /**
+     * Determine if this resource is available for navigation.
+     */
+    public static function availableForNavigation(Request $request): bool
+    {
+        return config('nova-comments.available-for-navigation');
+    }
+
+    /**
      * Get the fields displayed by the resource.
      */
     public function fields(NovaRequest $request): array
@@ -95,13 +112,5 @@ class Comment extends Resource
     public function actions(NovaRequest $request): array
     {
         return [];
-    }
-
-    /**
-     * Determine if this resource is available for navigation.
-     */
-    public static function availableForNavigation(Request $request): bool
-    {
-        return config('nova-comments.available-for-navigation');
     }
 }

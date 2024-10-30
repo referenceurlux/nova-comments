@@ -13,7 +13,7 @@ class Commenter extends ResourceTool
      */
     public function name(): string
     {
-        return 'Commenter';
+        return __('Commenter');
     }
 
     /**
