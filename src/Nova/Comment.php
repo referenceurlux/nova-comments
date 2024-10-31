@@ -69,9 +69,10 @@ class Comment extends Resource
 
             Text::make(__('comment'), 'comment')
                 ->displayUsing(function ($comment) {
-                    return Str::limit(strip_tags($comment), config('nova-comments.limit'));
+                    return Str::limit($comment, config('nova-comments.limit'));
                 })
-                ->onlyOnIndex(),
+                ->onlyOnIndex()
+                ->asHtml(),
 
             BelongsTo::make(__('Commenter'), 'commenter', config('nova-comments.commenter.nova-resource'))
                 ->exceptOnForms(),
